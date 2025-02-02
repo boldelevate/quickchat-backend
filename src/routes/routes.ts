@@ -72,6 +72,7 @@ router.post("/load-dashboard", (req: Request, res: Response) => {
 
             const chats = (await Chat.countDocuments()) + adjustmentFactor;
             const calls = (await Call.countDocuments()) + adjustmentFactor;
+            const user = await User.findOne(query);
 
             successRes(res, {
                 code: "DATA_SHARED", data: {
@@ -81,6 +82,7 @@ router.post("/load-dashboard", (req: Request, res: Response) => {
                     chatsArray: await Chat.find({ username: req.body.selectUser }),
                     callsArray: await Call.find({ username: req.body.selectUser }),
                     users: await User.find().select({ username: 1 }),
+                    admin: (user?.admin) ? true : false,
                 }
             });
         } else {

@@ -18,6 +18,10 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength: MIN_PASSWORD_LENGTH,
         maxlength: MAX_PASSWORD_LENGTH,
+    },
+    admin: {
+        type: Boolean,
+        required: true,
     }
 });
 
